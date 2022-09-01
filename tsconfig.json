@@ -1,11 +1,15 @@
 {
     "include": ["src/"],
+    "exclude": ["src/public/"],
     "compilerOptions": {
-        "baseUrl": ".",
         "outDir": "dist/",
         "declaration": true,
-        "paths": {
-            "@/*": ["./src/*"]
-        }
+        "lib": ["ES2021", "DOM", "DOM.Iterable"],
+        "target": "ES2021",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "strict": true
     }
 }

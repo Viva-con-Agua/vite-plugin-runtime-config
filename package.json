@@ -3,17 +3,6 @@
     "version": "1.0.0-dev1",
     "description": "A vite plugin for runtime configuration",
     "main": "dist/index.js",
-    "files": [
-        "dist",
-        "src"
-    ],
-    "scripts": {
-        "lint": "npm run lint:eslint && npm run lint:prettier",
-        "lint:eslint": "eslint src/",
-        "lint:prettier": "prettier --check src/",
-        "format": "prettier --write src/",
-        "build": "tsc --build"
-    },
     "author": {
         "name": "Viva con Agua",
         "email": "it@vivaconagua.org",
@@ -23,12 +12,33 @@
         "Finn-Thorben Sell <dev@finn-thorben.me>"
     ],
     "license": "MIT",
+    "scripts": {
+        "lint": "run-s lint:eslint lint:prettier",
+        "lint:eslint": "eslint src/",
+        "lint:prettier": "prettier --check src/",
+        "format": "prettier --write src/",
+        "build": "run-s clean build:compile build:copy",
+        "build:compile": "tsc --build",
+        "build:copy": "copyfiles -Vf ./src/public/* ./dist/public/",
+        "dev": "vite",
+        "clean": "rm -rf dist"
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
     "devDependencies": {
+        "@types/lodash": "^4.14.184",
+        "@types/node": "^18.7.14",
         "@typescript-eslint/eslint-plugin": "^5.36.1",
         "@typescript-eslint/parser": "^5.36.1",
+        "copyfiles": "^2.4.1",
         "eslint": "^8.23.0",
         "eslint-config-prettier": "^8.5.0",
+        "npm-run-all": "^4.1.5",
         "prettier": "^2.7.1",
-        "typescript": "^4.8.2"
+        "typescript": "^4.8.2",
+        "vite": "^3.0.9",
+        "vite-plugin-inspect": "^0.6.1"
     }
 }

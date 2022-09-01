@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="test" content="{{ VITE_META_TAG }}" />
+        <title>Vite Test App</title>
+    </head>
+    <body>
+        <h1>Hello {{ VITE_PERSON_NAME }}</h1>
+        <p>
+            <span>Config is</span>
+            <span>{% VITE_RT_CONFIG %}</span>
+        </p>
+    </body>
+</html>
