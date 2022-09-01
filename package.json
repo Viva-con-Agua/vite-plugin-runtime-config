@@ -1,0 +1,34 @@
+{
+    "name": "vite-plugin-runtime-config",
+    "version": "1.0.0-dev1",
+    "description": "A vite plugin for runtime configuration",
+    "main": "dist/index.js",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "scripts": {
+        "lint": "npm run lint:eslint && npm run lint:prettier",
+        "lint:eslint": "eslint src/",
+        "lint:prettier": "prettier --check src/",
+        "format": "prettier --write src/",
+        "build": "tsc --build"
+    },
+    "author": {
+        "name": "Viva con Agua",
+        "email": "it@vivaconagua.org",
+        "url": "https://github.com/Viva-con-Agua/"
+    },
+    "maintainers": [
+        "Finn-Thorben Sell <dev@finn-thorben.me>"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.36.1",
+        "@typescript-eslint/parser": "^5.36.1",
+        "eslint": "^8.23.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.7.1",
+        "typescript": "^4.8.2"
+    }
+}
