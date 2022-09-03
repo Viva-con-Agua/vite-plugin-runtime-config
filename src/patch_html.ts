@@ -1,4 +1,5 @@
 import { ResolvedConfig } from "vite";
+import { pickBy } from "lodash";
 
 /**
  * Replace individual config keys in the given html string with values from the process environment.
@@ -25,5 +26,10 @@ export function replaceIndividualKeys(html: string, vite_cfg: ResolvedConfig): s
  */
 export function replaceCompleteConfig(html: string, vite_cfg: ResolvedConfig): string {
     const regexp = new RegExp(`{% *${vite_cfg.envPrefix || "VITE_"}RT_CONFIG *%}`, "ig");
-    return html.replaceAll(regexp, JSON.stringify(vite_cfg.env));
+    return html.replaceAll(
+        regexp,
+        JSON.stringify(
+            pickBy(vite_cfg.env, (_, key) => key.startsWith((vite_cfg.envPrefix as string) || "VITE_"))
+        )
+    );
 }

@@ -10,6 +10,7 @@
         "moduleResolution": "Node",
         "skipLibCheck": true,
         "isolatedModules": true,
-        "strict": true
+        "strict": true,
+        "allowSyntheticDefaultImports": true
     }
 }
