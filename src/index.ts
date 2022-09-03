@@ -27,21 +27,23 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         transformIndexHtml(html, _ctx) {
-            html = replaceIndividualKeys(html, vite_cfg);
-            html = replaceCompleteConfig(html, vite_cfg);
-            return {
-                html: html,
-                tags: [
-                    {
-                        tag: "script",
-                        injectTo: "body",
-                        attrs: {
-                            type: "application/ecmascript",
+            if (vite_cfg.command == "serve") {
+                html = replaceIndividualKeys(html, vite_cfg);
+                html = replaceCompleteConfig(html, vite_cfg);
+                return {
+                    html: html,
+                    tags: [
+                        {
+                            tag: "script",
+                            injectTo: "body",
+                            attrs: {
+                                type: "application/ecmascript",
+                            },
+                            children: `window.config = ${JSON.stringify(vite_cfg.env)};`,
                         },
-                        children: `window.config = ${JSON.stringify(vite_cfg.env)};`,
-                    },
-                ],
-            };
+                    ],
+                };
+            }
         },
     };
 }
