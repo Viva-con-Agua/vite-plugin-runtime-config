@@ -18,3 +18,10 @@ repos:
       rev: "v8.23.0"
       hooks:
           - id: eslint
+
+    - repo: https://github.com/TekWizely/pre-commit-golang
+      rev: "v1.0.0-beta.5"
+      hooks:
+          - id: go-fmt
+          - id: go-build-mod
+          - id: go-mod-tidy

@@ -1,12 +1,12 @@
+import { ResolvedConfig } from "vite";
+
 /**
  * Replace individual config keys in the given html string with values from the process environment.
  *
  * Individual keys are written using the syntax `{{ VITE_KEY }}`.
  */
-import { ResolvedConfig } from "vite";
-
 export function replaceIndividualKeys(html: string, vite_cfg: ResolvedConfig): string {
-    const regexp = new RegExp(`{{ *(${vite_cfg.envPrefix || "VITE_"}[\\w\\d_]+?) *}}`, "ig");
+    const regexp = new RegExp(`{{ *(${vite_cfg.envPrefix || "VITE_"}[\\w_]+?) *}}`, "ig");
     return html.replaceAll(regexp, (match, ...args: any[]) => {
         const key = args[0];
         if (vite_cfg.env[key] == undefined) {
