@@ -20,7 +20,7 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
             if (plugin_options.emitPatchScript) {
                 this.emitFile({
                     type: "asset",
-                    fileName: "patch_runtime_config.sh",
+                    fileName: "patch_runtime_config.bin",
                     source: await readPatchRuntimeConfigSh(),
                 });
             }
