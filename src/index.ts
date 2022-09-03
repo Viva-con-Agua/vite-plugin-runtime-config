@@ -1,19 +1,19 @@
-import { Plugin } from "vite";
+import { Plugin, ResolvedConfig } from "vite";
 import { defaultOptions, PluginOptions } from "./options";
 import { readPatchRuntimeConfigSh } from "./scripts";
-import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } from "./patch_html";
+import { replaceIndividualKeys, replaceCompleteConfig } from "./patch_html";
 
 export type { PluginOptions } from "./options";
 
 export function RuntimeConfig(options?: PluginOptions): Plugin {
     const plugin_options = { ...defaultOptions, ...options };
-    let vite_env: Record<string, any> | null = null;
+    let vite_cfg: ResolvedConfig;
 
     return {
         name: "vite-plugin-runtime-config",
 
         configResolved(config) {
-            vite_env = config.env;
+            vite_cfg = config;
         },
 
         async generateBundle() {
@@ -27,8 +27,8 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         transformIndexHtml(html, _ctx) {
-            html = replaceIndividualKeys(html, vite_env || {});
-            html = replaceCompleteConfig(html, vite_env || {});
+            html = replaceIndividualKeys(html, vite_cfg.env);
+            html = replaceCompleteConfig(html, vite_cfg.env);
             return {
                 html: html,
                 tags: [
@@ -38,7 +38,7 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
                         attrs: {
                             type: "application/ecmascript",
                         },
-                        children: `window.config = ${renderCompleteConfig(vite_env || {})};`,
+                        children: `window.config = ${JSON.stringify(vite_cfg.env)};`,
                     },
                 ],
             };

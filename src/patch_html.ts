@@ -3,16 +3,16 @@
  *
  * Individual keys are written using the syntax `{{ VITE_KEY }}`.
  */
-export function replaceIndividualKeys(html: string, env: Record<string, any>): string {
+export function replaceIndividualKeys(html: string, runtime_config: Record<string, any>): string {
     const regexp = /{{ *(VITE_.+?) *}}/g;
     return html.replaceAll(regexp, (match, ...args: any[]) => {
         const key = args[0];
-        if (env[key] == undefined) {
+        if (runtime_config[key] == undefined) {
             console.warn(
                 `[WARNING] index.html references runtime config key ${key} which is undefined, using empty string`
             );
         }
-        return env[key] || "";
+        return runtime_config[key] || "";
     });
 }
 
@@ -21,14 +21,7 @@ export function replaceIndividualKeys(html: string, env: Record<string, any>): s
  *
  * Those references are written using the syntax `{% VITE_RT_CONFIG %}`
  */
-export function replaceCompleteConfig(html: string, env: Record<string, any>): string {
+export function replaceCompleteConfig(html: string, runtime_config: Record<string, any>): string {
     const regexp = /{% *VITE_RT_CONFIG *%}/g;
-    return html.replaceAll(regexp, renderCompleteConfig(env));
-}
-
-/**
- * Render the complete runtime config as a string that can be inserted into a <script> tag
- */
-export function renderCompleteConfig(env: Record<string, any>): string {
-    return JSON.stringify(env);
+    return html.replaceAll(regexp, JSON.stringify(runtime_config));
 }
