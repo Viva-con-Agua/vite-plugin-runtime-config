@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/akamensky/argparse"
 	"os"
+	"path"
 )
 
 func validateFileExists(args []string) error {
@@ -29,7 +30,7 @@ type ProgramArgs struct {
 
 func ParseArgs() ProgramArgs {
 	parser := argparse.NewParser(
-		"vite_plugin_config_replacer",
+		path.Base(os.Args[0]),
 		"Helper program to replace runtime config placeholders inside an index.html file",
 	)
 
