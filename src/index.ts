@@ -27,8 +27,8 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         transformIndexHtml(html, _ctx) {
-            html = replaceIndividualKeys(html, vite_cfg.env);
-            html = replaceCompleteConfig(html, vite_cfg.env);
+            html = replaceIndividualKeys(html, vite_cfg);
+            html = replaceCompleteConfig(html, vite_cfg);
             return {
                 html: html,
                 tags: [

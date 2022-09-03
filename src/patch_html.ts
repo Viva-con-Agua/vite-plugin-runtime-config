@@ -3,16 +3,18 @@
  *
  * Individual keys are written using the syntax `{{ VITE_KEY }}`.
  */
-export function replaceIndividualKeys(html: string, runtime_config: Record<string, any>): string {
-    const regexp = /{{ *(VITE_.+?) *}}/g;
+import { ResolvedConfig } from "vite";
+
+export function replaceIndividualKeys(html: string, vite_cfg: ResolvedConfig): string {
+    const regexp = new RegExp(`{{ *(${vite_cfg.envPrefix || "VITE_"}[\\w\\d_]+?) *}}`, "ig");
     return html.replaceAll(regexp, (match, ...args: any[]) => {
         const key = args[0];
-        if (runtime_config[key] == undefined) {
+        if (vite_cfg.env[key] == undefined) {
             console.warn(
                 `[WARNING] index.html references runtime config key ${key} which is undefined, using empty string`
             );
         }
-        return runtime_config[key] || "";
+        return vite_cfg.env[key] || "";
     });
 }
 
@@ -21,7 +23,7 @@ export function replaceIndividualKeys(html: string, runtime_config: Record<strin
  *
  * Those references are written using the syntax `{% VITE_RT_CONFIG %}`
  */
-export function replaceCompleteConfig(html: string, runtime_config: Record<string, any>): string {
-    const regexp = /{% *VITE_RT_CONFIG *%}/g;
-    return html.replaceAll(regexp, JSON.stringify(runtime_config));
+export function replaceCompleteConfig(html: string, vite_cfg: ResolvedConfig): string {
+    const regexp = new RegExp(`{% *${vite_cfg.envPrefix || "VITE_"}RT_CONFIG *%}`, "ig");
+    return html.replaceAll(regexp, JSON.stringify(vite_cfg.env));
 }
