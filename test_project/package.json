@@ -9,7 +9,7 @@
         "type-check": "vue-tsc --noEmit"
     },
     "devDependencies": {
-        "vite": "^3.0.9",
+        "vite": "^3.1.0",
         "vue": "^3.2.37",
         "vite-plugin-runtime-config": "file:../",
         "@vitejs/plugin-vue": "^3.0.1",

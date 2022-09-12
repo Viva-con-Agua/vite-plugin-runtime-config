@@ -3,7 +3,7 @@ import { defaultOptions, PluginOptions } from "./options";
 import { readPatchRuntimeConfigSh } from "./scripts";
 import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } from "./patch_html";
 
-function PluginRuntimeConfig(options?: PluginOptions): Plugin {
+function pluginRuntimeConfig(options?: PluginOptions): Plugin {
     const plugin_options = { ...defaultOptions, ...options };
     let vite_cfg: ResolvedConfig;
 
@@ -52,5 +52,5 @@ function PluginRuntimeConfig(options?: PluginOptions): Plugin {
     };
 }
 
-export { PluginRuntimeConfig, PluginOptions };
-export default PluginRuntimeConfig;
+export { PluginOptions };
+export default pluginRuntimeConfig;
