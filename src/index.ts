@@ -27,23 +27,29 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         transformIndexHtml(html, _ctx) {
+            let configRef: string = `{% ${vite_cfg.envPrefix || "VITE_"}RT_CONFIG %}`;
+
             if (vite_cfg.command == "serve") {
+                // immediately replace all references during development
                 html = replaceIndividualKeys(html, vite_cfg);
                 html = replaceCompleteConfig(html, vite_cfg);
-                return {
-                    html: html,
-                    tags: [
-                        {
-                            tag: "script",
-                            injectTo: "body",
-                            attrs: {
-                                type: "application/ecmascript",
-                            },
-                            children: `window.config = ${JSON.stringify(vite_cfg.env)};`,
-                        },
-                    ],
-                };
+                configRef = JSON.stringify(vite_cfg.env);
             }
+
+            // return the (maybe) patched html as well as an extra script which populates the window.config object
+            return {
+                html: html,
+                tags: [
+                    {
+                        tag: "script",
+                        injectTo: "body-prepend",
+                        attrs: {
+                            type: "application/ecmascript",
+                        },
+                        children: `window.config = ${configRef};`,
+                    },
+                ],
+            };
         },
     };
 }
