@@ -2,10 +2,18 @@
     "name": "test-project",
     "private": true,
     "scripts": {
-        "vite": "vite"
+        "dev": "vite",
+        "build": "run-p type-check build-only",
+        "preview": "vite preview --port 4173",
+        "build-only": "vite build",
+        "type-check": "vue-tsc --noEmit"
     },
     "devDependencies": {
         "vite": "^3.0.9",
-        "vite-plugin-runtime-config": "file:../"
+        "vue": "^3.2.37",
+        "vite-plugin-runtime-config": "file:../",
+        "@vitejs/plugin-vue": "^3.0.1",
+        "typescript": "~4.7.4",
+        "vue-tsc": "^0.39.5"
     }
 }
