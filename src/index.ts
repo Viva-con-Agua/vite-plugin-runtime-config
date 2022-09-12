@@ -50,7 +50,7 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
                         attrs: {
                             type: "application/ecmascript",
                         },
-                        children: `window.config = ${configRef};`,
+                        children: `window.config = Object.freeze(${configRef});`,
                     },
                 ],
             };
