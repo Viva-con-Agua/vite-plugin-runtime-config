@@ -26,10 +26,11 @@ export function replaceIndividualKeys(html: string, vite_cfg: ResolvedConfig): s
  */
 export function replaceCompleteConfig(html: string, vite_cfg: ResolvedConfig): string {
     const regexp = new RegExp(`{% *${vite_cfg.envPrefix || "VITE_"}RT_CONFIG *%}`, "ig");
-    return html.replaceAll(
-        regexp,
-        JSON.stringify(
-            pickBy(vite_cfg.env, (_, key) => key.startsWith((vite_cfg.envPrefix as string) || "VITE_"))
-        )
+    return html.replaceAll(regexp, renderCompleteConfig(vite_cfg));
+}
+
+export function renderCompleteConfig(vite_cfg: ResolvedConfig): string {
+    return JSON.stringify(
+        pickBy(vite_cfg.env, (_, key) => key.startsWith((vite_cfg.envPrefix as string) || "VITE_"))
     );
 }
