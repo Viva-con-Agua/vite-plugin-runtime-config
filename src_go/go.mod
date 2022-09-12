@@ -1,6 +1,6 @@
 module vite_plugin_runtime_config_replacer
 
-go 1.19
+go 1.17
 
 require (
 	github.com/akamensky/argparse v1.4.0
