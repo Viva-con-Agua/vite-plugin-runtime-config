@@ -3,6 +3,12 @@ import { defaultOptions, PluginOptions } from "./options";
 import { readPatchRuntimeConfigSh } from "./scripts";
 import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } from "./patch_html";
 
+declare global {
+    interface Window {
+        config: Readonly<Record<string, string>>;
+    }
+}
+
 function pluginRuntimeConfig(options?: PluginOptions): Plugin {
     const plugin_options = { ...defaultOptions, ...options };
     let vite_cfg: ResolvedConfig;
