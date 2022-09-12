@@ -17,7 +17,7 @@ export function RuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         async generateBundle() {
-            if (plugin_options.emitPatchScript) {
+            if (plugin_options.emitPatchProgram) {
                 this.emitFile({
                     type: "asset",
                     fileName: "patch_runtime_config.bin",

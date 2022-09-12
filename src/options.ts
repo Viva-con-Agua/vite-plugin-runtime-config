@@ -3,13 +3,13 @@
  */
 export interface PluginOptions {
     /**
-     * Whether a `patch_runtime_config.sh` script should be emitted.
+     * Whether a `patch_runtime_config.bin` program should be emitted.
      *
-     * This script is coded to automatically replace references to runtime configuration inside index.html with values that are taken from the environment.
+     * This program replaces references to runtime configuration inside index.html with values that are taken from the environment.
      */
-    emitPatchScript: boolean;
+    emitPatchProgram: boolean;
 }
 
 export const defaultOptions: PluginOptions = {
-    emitPatchScript: true,
+    emitPatchProgram: true,
 };
