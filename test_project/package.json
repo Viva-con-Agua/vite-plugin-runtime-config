@@ -1,0 +1,11 @@
+{
+    "name": "test-project",
+    "private": true,
+    "scripts": {
+        "vite": "vite"
+    },
+    "devDependencies": {
+        "vite": "^3.0.9",
+        "vite-plugin-runtime-config": "file:../"
+    }
+}

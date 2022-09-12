@@ -6,10 +6,9 @@
         "declaration": true,
         "lib": ["ES2021", "DOM", "DOM.Iterable"],
         "target": "ES2021",
-        "module": "ESNext",
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "skipLibCheck": true,
-        "isolatedModules": true,
         "strict": true,
         "allowSyntheticDefaultImports": true
     }

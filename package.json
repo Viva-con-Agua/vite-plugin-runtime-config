@@ -3,6 +3,7 @@
     "version": "1.0.0-dev1",
     "description": "A vite plugin for runtime configuration",
     "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "author": {
         "name": "Viva con Agua",
         "email": "it@vivaconagua.org",
@@ -20,7 +21,6 @@
         "build": "run-p clean build:compile build:go",
         "build:compile": "tsc --build",
         "build:go": "cd src_go && CGO_ENABLED=0 go build -o ../dist/patch_runtime_config.bin .",
-        "dev": "vite",
         "clean": "rm -rf dist"
     },
     "files": [

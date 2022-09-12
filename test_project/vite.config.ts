@@ -1,10 +1,9 @@
 import * as path from "path";
 import { defineConfig } from "vite";
-import Inspect from "vite-plugin-inspect";
-import RuntimeConfig from "./src";
+import RuntimeConfig from "vite-plugin-runtime-config";
 
 export default defineConfig({
-    plugins: [Inspect(), RuntimeConfig()],
+    plugins: [RuntimeConfig()],
     build: {
         outDir: path.resolve("./vite_dist"),
     },
