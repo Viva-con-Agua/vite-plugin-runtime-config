@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const personName = window.config["VITE_PERSON_NAME"];
+const personName = window.config.VITE_PERSON_NAME;
 </script>
 
 <template>

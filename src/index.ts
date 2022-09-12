@@ -5,7 +5,7 @@ import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } fr
 
 declare global {
     interface Window {
-        config: Readonly<Record<string, string>>;
+        config: Readonly<Record<string, string | undefined>>;
     }
 }
 
