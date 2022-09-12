@@ -15,24 +15,47 @@ func main() {
 	}
 	log.Printf("Loaded environment from .env file %s\n", *args.envFile)
 
-	// read html file
-	log.Printf("Replacing runtime configuration in %s\n", *args.indexFile)
-	if file, err := os.OpenFile(*args.indexFile, os.O_RDWR, 0644); err != nil {
-		log.Fatalf("Could not open index.html: %s", err)
-	} else {
-		stat, _ := file.Stat()
-		buffer := make([]byte, stat.Size())
-		_, _ = file.Read(buffer)
+	html := readInFile(*args.inFile)
+	html = ReplaceIndividualKeys(html, args.envPrefix)
+	html = ReplaceCompleteConfig(html, args.envPrefix)
+	writeOutFile(*args.outFile, html)
+}
 
-		// replace all runtime config references
-		html := ReplaceIndividualKeys(string(buffer), args.envPrefix)
-		html = ReplaceCompleteConfig(html, args.envPrefix)
+func readInFile(templatePath string) string {
+	log.Printf("Reading index.html template %s\n", templatePath)
 
-		// write file content back
-		_, _ = file.Seek(0, 0)
-		buffer = []byte(html)
-		_ = file.Truncate(int64(len(buffer)))
-		_, _ = file.Write(buffer)
+	var err error
+	file, err := os.OpenFile(templatePath, os.O_RDONLY, 0644)
+	if err != nil {
+		log.Fatalf("Could not open index.html template: %s", err)
 	}
 
+	stat, err := file.Stat()
+	if err != nil {
+		log.Fatalf("Could not stat file size of index.html template: %s", err)
+	}
+
+	buffer := make([]byte, stat.Size())
+	if _, err = file.Read(buffer); err != nil {
+		log.Fatalf("Could not read file content of index.html template: %s", err)
+	}
+
+	_ = file.Close()
+	return string(buffer)
+}
+
+func writeOutFile(outPath string, html string) {
+	log.Printf("Writing rendered index.html to %s\n", outPath)
+
+	var err error
+	file, err := os.OpenFile(outPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatalf("Could not open out file: %s", err)
+	}
+
+	if _, err := file.WriteString(html); err != nil {
+		log.Fatalf("Could not write html content to out file: %s", err)
+	}
+
+	_ = file.Close()
 }
