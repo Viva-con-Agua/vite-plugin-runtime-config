@@ -7,6 +7,7 @@ export default defineConfig({
         },
     },
     test: {
+        include: ["test/**.test.ts"],
         coverage: {
             enabled: true,
             provider: "istanbul",

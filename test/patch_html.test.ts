@@ -18,10 +18,10 @@ beforeAll(async () => {
     });
 });
 
-test.concurrent("replaceIndividualKeys", () => {
+test("replaceIndividualKeys", () => {
     expect(patch_html.replaceIndividualKeys(html, mock_cfg)).toMatchSnapshot();
 });
 
-test.concurrent("replaceCompleteConfig", () => {
+test("replaceCompleteConfig", () => {
     expect(patch_html.replaceCompleteConfig(html, mock_cfg)).toMatchSnapshot();
 });

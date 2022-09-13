@@ -22,7 +22,7 @@ beforeAll(() => {
     });
 });
 
-test.concurrent("generateBundle hook", async () => {
+test("generateBundle hook", async () => {
     const plugin = runtimeConfig({
         emitPatchScript: true,
         emitGnuLinuxPatchBinary: true,
@@ -46,7 +46,7 @@ test.concurrent("generateBundle hook", async () => {
     });
 });
 
-test.concurrent("configResolved hook", () => {
+test("configResolved hook", () => {
     const plugin = runtimeConfig();
     (plugin.configResolved as MockHook).call(mockPluginContext);
 });
