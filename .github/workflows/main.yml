@@ -4,3 +4,31 @@ on: [push]
 jobs:
     check-pre-commit:
         uses: Viva-con-Agua/workflows/.github/workflows/check_pre_commit.yml@main
+
+    unit-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - run: npm install --include=dev
+            - run: npm test
+            - uses: actions/upload-artifact@v3
+              with:
+                  name: test-coverage
+                  path: coverage/
+
+    e2e-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - run: npm install --include=dev
+            - run: npm run build
+            - run: npm install --include=dev
+              working-directory: test_project
+            - run: npm test
+              working-directory: test_project
