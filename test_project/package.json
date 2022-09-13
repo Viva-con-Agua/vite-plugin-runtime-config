@@ -6,14 +6,18 @@
         "build": "run-p type-check build-only",
         "preview": "vite preview --port 4173",
         "build-only": "vite build",
-        "type-check": "vue-tsc --noEmit"
+        "type-check": "vue-tsc --noEmit",
+        "test": "vitest run"
     },
     "devDependencies": {
-        "vite": "^3.1.0",
-        "vue": "^3.2.37",
-        "vite-plugin-runtime-config": "file:../",
+        "@testing-library/vue": "^6.6.1",
         "@vitejs/plugin-vue": "^3.0.1",
+        "jsdom": "^20.0.0",
         "typescript": "~4.7.4",
+        "vite": "^3.1.0",
+        "vite-plugin-runtime-config": "file:../",
+        "vitest": "^0.23.2",
+        "vue": "^3.2.37",
         "vue-tsc": "^0.39.5"
     }
 }
