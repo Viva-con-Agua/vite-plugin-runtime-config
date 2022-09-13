@@ -11,6 +11,13 @@
         "Finn-Thorben Sell <dev@finn-thorben.me>"
     ],
     "license": "MIT",
+    "homepage": "https://github.com/Viva-con-Agua/vite-plugin-runtime-config",
+    "bugs": "https://github.com/Viva-con-Agua/vite-plugin-runtime-config/issues",
+    "keywords": [
+        "front-end",
+        "configuration",
+        "vite-plugin"
+    ],
     "scripts": {
         "lint": "run-s lint:eslint lint:prettier",
         "lint:eslint": "eslint src/",
