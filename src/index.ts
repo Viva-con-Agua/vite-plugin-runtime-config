@@ -1,6 +1,6 @@
 import { Plugin, ResolvedConfig } from "vite";
 import { defaultOptions, PluginOptions } from "./options";
-import { readPatchRuntimeConfigScript } from "./scripts";
+import { readPatchRuntimeConfigScript, readPatchRuntimeConfigBinary } from "./scripts";
 import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } from "./patch_html";
 
 declare global {
@@ -10,7 +10,6 @@ declare global {
 }
 
 function pluginRuntimeConfig(options?: PluginOptions): Plugin {
-    const plugin_options = { ...defaultOptions, ...options };
     let vite_cfg: ResolvedConfig;
 
     return {
@@ -21,11 +20,27 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
         },
 
         async generateBundle() {
-            if (plugin_options.emitPatchProgram) {
+            if (options?.emitPatchScript || defaultOptions.emitPatchScript) {
                 this.emitFile({
                     type: "asset",
                     fileName: "patch_runtime_config.js",
                     source: await readPatchRuntimeConfigScript(),
+                });
+            }
+
+            if (options?.emitPatchPrograms?.gnu_linux || defaultOptions.emitPatchPrograms.gnu_linux) {
+                this.emitFile({
+                    type: "asset",
+                    fileName: "patch_runtime_config.gnu_linux.bin",
+                    source: await readPatchRuntimeConfigBinary("gnu_linux"),
+                });
+            }
+
+            if (options?.emitPatchPrograms?.alpine || defaultOptions.emitPatchPrograms.alpine) {
+                this.emitFile({
+                    type: "asset",
+                    fileName: "patch_runtime_config.alpine.bin",
+                    source: await readPatchRuntimeConfigBinary("alpine"),
                 });
             }
         },
