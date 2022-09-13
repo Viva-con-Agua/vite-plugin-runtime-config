@@ -1,7 +1,7 @@
 import { ResolvedConfig } from "vite";
 import { pickBy } from "lodash";
 
-type ConfigLike = Pick<ResolvedConfig, "envPrefix" | "env">;
+export type ConfigLike = Pick<ResolvedConfig, "envPrefix" | "env">;
 
 /**
  * Replace individual config keys in the given html string with values from the process environment.

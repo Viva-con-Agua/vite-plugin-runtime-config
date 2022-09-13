@@ -3,7 +3,7 @@ import { ArgumentParser } from "argparse";
 import * as dotenv from "dotenv";
 import * as dotenv_expand from "dotenv-expand";
 import { readFile, writeFile } from "node:fs/promises";
-import { replaceIndividualKeys, replaceCompleteConfig } from "./patch_html";
+import { replaceIndividualKeys, replaceCompleteConfig, ConfigLike } from "./patch_html";
 import { PathLike } from "fs";
 
 function parseArgs(): { in: string; out: string; env_prefix: string; env_file: string | undefined } {
@@ -78,7 +78,7 @@ async function main() {
     const args = parseArgs();
     loadDotenv(args.env_file);
 
-    const config = {
+    const config: ConfigLike = {
         env: process.env,
         envPrefix: args.env_prefix,
     };
