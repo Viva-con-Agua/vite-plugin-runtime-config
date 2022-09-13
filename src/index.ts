@@ -1,6 +1,6 @@
 import { Plugin, ResolvedConfig } from "vite";
 import { defaultOptions, PluginOptions } from "./options";
-import { readPatchRuntimeConfigSh } from "./scripts";
+import { readPatchRuntimeConfigScript } from "./scripts";
 import { replaceIndividualKeys, replaceCompleteConfig, renderCompleteConfig } from "./patch_html";
 
 declare global {
@@ -24,8 +24,8 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
             if (plugin_options.emitPatchProgram) {
                 this.emitFile({
                     type: "asset",
-                    fileName: "patch_runtime_config.bin",
-                    source: await readPatchRuntimeConfigSh(),
+                    fileName: "patch_runtime_config.js",
+                    source: await readPatchRuntimeConfigScript(),
                 });
             }
         },
