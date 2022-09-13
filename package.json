@@ -23,7 +23,8 @@
         "build:bundle_patch_script": "esbuild --bundle --platform=node --outfile=dist/assets/patch_runtime_config.js src/script_entrypoint.ts",
         "build:bundle_patch_bin:gnu_linux": "pkg --public --targets node16-linux-x64 -o dist/assets/patch_runtime_config.gnu_linux.bin dist/assets/patch_runtime_config.js",
         "build:bundle_patch_bin:alpine": "pkg --public --targets node16-alpine-x64 -o dist/assets/patch_runtime_config.alpine.bin dist/assets/patch_runtime_config.js",
-        "clean": "rm -rf dist"
+        "clean": "rm -rf dist",
+        "test": "vitest run"
     },
     "files": [
         "dist",
@@ -38,6 +39,7 @@
         "@types/node": "^18.7.14",
         "@typescript-eslint/eslint-plugin": "^5.36.1",
         "@typescript-eslint/parser": "^5.36.1",
+        "@vitest/coverage-c8": "^0.23.2",
         "argparse": "^2.0.1",
         "dotenv": "^16.0.2",
         "dotenv-expand": "^9.0.0",
@@ -49,6 +51,7 @@
         "prettier": "^2.7.1",
         "typescript": "^4.8.2",
         "vite": "^3.1.0",
-        "vite-plugin-inspect": "^0.6.1"
+        "vite-plugin-inspect": "^0.6.1",
+        "vitest": "^0.23.2"
     }
 }

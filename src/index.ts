@@ -79,5 +79,5 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
     };
 }
 
-export { PluginOptions };
+export { PluginOptions as Options, pluginRuntimeConfig as runtimeConfig };
 export default pluginRuntimeConfig;
