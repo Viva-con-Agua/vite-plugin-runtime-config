@@ -1,6 +1,6 @@
 # vite-plugin-runtime-config
 
-![main branch status](https://img.shields.io/github/checks-status/Viva-con-Agua/vite-plugin-runtime-config/main?style=flat-square)
+[![main branch status](https://img.shields.io/github/checks-status/Viva-con-Agua/vite-plugin-runtime-config/main?style=flat-square)](https://github.com/Viva-con-Agua/vite-plugin-runtime-config)
 
 A vite plugin for runtime configuration.
 
