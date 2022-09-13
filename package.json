@@ -2,8 +2,6 @@
     "name": "vite-plugin-runtime-config",
     "version": "1.0.0-dev1",
     "description": "A vite plugin for runtime configuration",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "author": {
         "name": "Viva con Agua",
         "email": "it@vivaconagua.org",
@@ -18,13 +16,26 @@
         "lint:eslint": "eslint src/",
         "lint:prettier": "prettier --check src/",
         "format": "prettier --write src/",
-        "build": "run-s clean build:compile_ts build:bundle_patch_script build:bundle_patch_bin:gnu_linux build:bundle_patch_bin:alpine",
+        "build": "run-s clean build:compile_ts build:bundle_plugin_entry build:bundle_patch_script build:bundle_patch_bin:gnu_linux build:bundle_patch_bin:alpine",
         "build:compile_ts": "tsc --build",
+        "build:bundle_plugin_entry": "esbuild --bundle --platform=node --external:lodash --outfile=dist/index.cjs src/index.ts",
         "build:bundle_patch_script": "esbuild --bundle --platform=node --outfile=dist/assets/patch_runtime_config.js src/script_entrypoint.ts",
         "build:bundle_patch_bin:gnu_linux": "pkg --public --targets node16-linux-x64 -o dist/assets/patch_runtime_config.gnu_linux.bin dist/assets/patch_runtime_config.js",
         "build:bundle_patch_bin:alpine": "pkg --public --targets node16-alpine-x64 -o dist/assets/patch_runtime_config.alpine.bin dist/assets/patch_runtime_config.js",
         "clean": "rm -rf dist",
         "test": "vitest run"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs",
+            "node": "./dist/index.cjs"
+        },
+        "./testing": {
+            "types": "./dist/testing.d.ts",
+            "import": "./dist/testing.js"
+        }
     },
     "files": [
         "dist",
@@ -53,5 +64,14 @@
         "vite": "^3.1.0",
         "vite-plugin-inspect": "^0.6.1",
         "vitest": "^0.23.2"
+    },
+    "peerDependencies": {
+        "vite": "^3.1.0",
+        "vitest": "^0.23.2"
+    },
+    "peerDependenciesMeta": {
+        "vitest": {
+            "optional": true
+        }
     }
 }

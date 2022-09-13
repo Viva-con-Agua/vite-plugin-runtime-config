@@ -3,14 +3,13 @@
     "exclude": ["src/script_entrypoint.ts"],
     "compilerOptions": {
         "outDir": "dist/",
-        "declaration": true,
         "lib": ["ES2021", "DOM", "DOM.Iterable"],
-        "target": "ES2021",
-        "module": "CommonJS",
         "moduleResolution": "Node",
         "skipLibCheck": true,
+        "target": "ESNext",
         "strict": true,
-        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "module": "ESNext",
         "paths": {
             "@/*": ["./src/*"]
         }
