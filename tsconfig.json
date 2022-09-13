@@ -1,6 +1,6 @@
 {
     "include": ["src/"],
-    "exclude": ["src/public/"],
+    "exclude": ["src/script_entrypoint.ts"],
     "compilerOptions": {
         "outDir": "dist/",
         "declaration": true,
@@ -11,5 +11,6 @@
         "skipLibCheck": true,
         "strict": true,
         "allowSyntheticDefaultImports": true
-    }
+    },
+    "references": []
 }

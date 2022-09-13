@@ -18,9 +18,9 @@
         "lint:eslint": "eslint src/",
         "lint:prettier": "prettier --check src/",
         "format": "prettier --write src/",
-        "build": "run-s clean build:compile build:go",
+        "build": "run-s clean build:compile build:bundle_patch_script",
         "build:compile": "tsc --build",
-        "build:go": "cd src_go && CGO_ENABLED=0 go build -o ../dist/patch_runtime_config.bin .",
+        "build:bundle_patch_script": "esbuild --bundle --platform=node --outfile=dist/patch_runtime_config.js src/script_entrypoint.ts",
         "clean": "rm -rf dist"
     },
     "files": [
@@ -39,6 +39,7 @@
         "argparse": "^2.0.1",
         "dotenv": "^16.0.2",
         "dotenv-expand": "^9.0.0",
+        "esbuild": "^0.15.7",
         "eslint": "^8.23.0",
         "eslint-config-prettier": "^8.5.0",
         "npm-run-all": "^4.1.5",
