@@ -28,7 +28,10 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
                 });
             }
 
-            if (options?.emitPatchPrograms?.gnu_linux || defaultOptions.emitPatchPrograms.gnu_linux) {
+            if (
+                (options?.emitGnuLinuxPatchBinary != undefined && options.emitGnuLinuxPatchBinary) ||
+                defaultOptions.emitGnuLinuxPatchBinary
+            ) {
                 this.emitFile({
                     type: "asset",
                     fileName: "patch_runtime_config.gnu_linux.bin",
@@ -36,7 +39,10 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
                 });
             }
 
-            if (options?.emitPatchPrograms?.alpine || defaultOptions.emitPatchPrograms.alpine) {
+            if (
+                (options?.emitAlpinePatchBinary != undefined && options.emitAlpinePatchBinary) ||
+                defaultOptions.emitAlpinePatchBinary
+            ) {
                 this.emitFile({
                     type: "asset",
                     fileName: "patch_runtime_config.alpine.bin",

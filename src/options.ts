@@ -11,28 +11,26 @@ export interface PluginOptions {
     emitPatchScript?: boolean;
 
     /**
-     * Whether `patch_runtime_config.$target.bin` programs should be emitted.
+     * Whether `patch_runtime_config.gnu_linux.bin` programs should be emitted.
      *
-     * These programs replace references to runtime configuration inside index.html with values that are taken from the environment.
-     * They do not require an installed node interpreter but are specific to the operating system they are running in.
-     * However, because they are binary programs their sizes are considerably larger than other assets so if your environment has node installed, you should only enable the `emitPatchScript` option.
+     * This programs replaces references to runtime configuration inside index.html with values that are taken from the environment.
+     * It does not require an installed node interpreter but is specific to Gnu/Linux.
+     * However, because it is a binary programs its sizes is considerably larger than other assets so if your environment has node installed, you should only enable the `emitPatchScript` option.
      */
-    emitPatchPrograms?: {
-        /**
-         * Whether a binary compatible with *standard* Gnu/Linux should be emitted
-         */
-        gnu_linux?: boolean;
-        /**
-         * Whether a binary compatible with alpine linux should be mitted
-         */
-        alpine?: boolean;
-    };
+    emitGnuLinuxPatchBinary?: boolean;
+
+    /**
+     * Whether `patch_runtime_config.alpine.bin` programs should be emitted.
+     *
+     * This programs replaces references to runtime configuration inside index.html with values that are taken from the environment.
+     * It does not require an installed node interpreter but is specific to Gnu/Linux.
+     * However, because it is a binary programs its sizes is considerably larger than other assets so if your environment has node installed, you should only enable the `emitPatchScript` option.
+     */
+    emitAlpinePatchBinary?: boolean;
 }
 
 export const defaultOptions: Required<PluginOptions> = {
     emitPatchScript: true,
-    emitPatchPrograms: {
-        alpine: true,
-        gnu_linux: true,
-    },
+    emitGnuLinuxPatchBinary: false,
+    emitAlpinePatchBinary: false,
 };
