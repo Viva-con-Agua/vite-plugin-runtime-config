@@ -1,0 +1,49 @@
+name: main
+on:
+    push:
+        tags: ["v\\d+\\.\\d+\\.\\d+"]
+
+jobs:
+    validate:
+        uses: ./.github/workflows/main.yml
+
+    release-npm:
+        needs: [validate]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 12
+            - run: npm install --include=dev
+            - uses: JS-DevTools/npm-publish@v1
+              with:
+                  tag: ${{ github.ref_name }}
+                  token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+    release-github:
+        needs: [validate]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v3
+            - name: extract release notes from tag
+              shell: bash
+              run: |
+                  git tag -l --format='%(contents:subject)' ${{ github.ref_name }} > ./release_notes.txt
+                  if [[ -n "$(git tag -l --format='%(contents:body)' ${{ github.ref_name }})" ]]; then
+                    echo >> ./release_notes.txt
+                    git tag -l --format='%(contents:body)' ${{ github.ref_name }} >> ./release_notes.txt
+                  fi
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - run: npm install --include=dev
+            - run: npm pack
+            - uses: softprops/action-gh-release@v1
+              with:
+                  body_path: ./release_notes.txt
+                  fail_on_unmatched_files: true
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  files: ./vite-plugin-runtime-config*.tgz
