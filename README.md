@@ -104,3 +104,10 @@ You can look in there for inspiration.
 ## Api
 
 The most relevant API for users are [plugin options](./src/options.ts), [testing utilities](./src/testing.ts) and [replacer program arguments](./src/script_entrypoint.ts).
+
+Additionally, the whole project is authored in typescript and type declaration files are distributed as part of our releases.
+Your IDE should pick this up pretty well and offer you good autocompletion and documentation.
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
