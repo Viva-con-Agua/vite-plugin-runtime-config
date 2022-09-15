@@ -17,16 +17,10 @@ Also, we conceptually did not think that changing configuration should require r
 
 ## Install
 
-Currently, this app is not published on npm but that is being worked on.
+The package is published on npm, and you can install it by running
 
-In the meantime, you can include it in your project through the following `package.json` entry
-
-```json
-{
-    "devDependencies": {
-        "vite-plugin-runtime-config": "Viva-con-Agua/vite-plugin-runtime-config#main"
-    }
-}
+```shell
+npm install --save-dev vite-plugin-runtime-config
 ```
 
 ## Usage
