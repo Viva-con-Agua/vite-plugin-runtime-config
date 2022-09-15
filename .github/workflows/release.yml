@@ -18,7 +18,6 @@ jobs:
             - run: npm install --include=dev
             - uses: JS-DevTools/npm-publish@v1
               with:
-                  tag: ${{ github.ref_name }}
                   token: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
     release-github:
