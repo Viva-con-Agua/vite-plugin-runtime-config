@@ -47,6 +47,8 @@ To author a release, the following steps need to be performed locally:
 1. Bump version in [package.json](./package.json)
 2. Create a commit with the bumped version.
 3. Create git tag with the following command where _X.X.X_ is the new version.
+   Git will automatically open an editor in which you can write additional info regarding this tag.
+   That information will also end up as release notes on GitHub so this would be a good place to put release notes.
     ```shell
     git tag -a vX.X.X
     ```
