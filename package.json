@@ -23,6 +23,7 @@
         "lint:eslint": "eslint src/",
         "lint:prettier": "prettier --check src/",
         "format": "prettier --write src/",
+        "prepublishOnly": "run-s build",
         "build": "run-s clean build:compile_ts build:bundle_plugin_entry build:bundle_patch_script build:bundle_patch_bin:gnu_linux build:bundle_patch_bin:alpine",
         "build:compile_ts": "tsc --build",
         "build:bundle_plugin_entry": "esbuild --bundle --platform=node --external:lodash --outfile=dist/index.cjs src/index.ts",
