@@ -51,8 +51,8 @@ function pluginRuntimeConfig(options?: PluginOptions): Plugin {
             }
         },
 
-        transformIndexHtml(html, _ctx) {
-            let configRef: string = `{% ${vite_cfg.envPrefix || "VITE_"}RT_CONFIG %}`;
+        transformIndexHtml(html) {
+            let configRef = `{% ${vite_cfg.envPrefix || "VITE_"}RT_CONFIG %}`;
 
             if (vite_cfg.command == "serve") {
                 // immediately replace all references during development

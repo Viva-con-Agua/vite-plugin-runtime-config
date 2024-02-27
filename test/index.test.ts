@@ -3,10 +3,12 @@ import { test, expect, vi, beforeAll } from "vitest";
 import { runtimeConfig } from "@/index";
 
 const mockPluginContext = {
-    emitFile: (_emittedFile: EmittedFile) => {},
+    emitFile: (emittedFile: EmittedFile) => {
+        return emittedFile;
+    },
 };
 
-type MockHook = (this: typeof mockPluginContext, ...args: any) => Promise<void>;
+type MockHook = (this: typeof mockPluginContext, ...args) => Promise<void>;
 
 beforeAll(() => {
     vi.spyOn(mockPluginContext, "emitFile");

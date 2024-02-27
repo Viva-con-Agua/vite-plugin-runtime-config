@@ -4,7 +4,7 @@ import * as Path from "path";
 import * as patch_html from "@/patch_html";
 
 let html: string;
-let mock_cfg: patch_html.ConfigLike = {
+const mock_cfg: patch_html.ConfigLike = {
     envPrefix: "VITE_",
     env: {
         VITE_TEST_IN_HEAD: "test-in-head-value",

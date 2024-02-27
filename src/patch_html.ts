@@ -10,7 +10,7 @@ export type ConfigLike = Pick<ResolvedConfig, "envPrefix" | "env">;
  */
 export function replaceIndividualKeys(html: string, vite_cfg: ConfigLike): string {
     const regexp = new RegExp(`{{ *(${vite_cfg.envPrefix || "VITE_"}[\\w_]+?) *}}`, "ig");
-    return html.replaceAll(regexp, (match, ...args: any[]) => {
+    return html.replaceAll(regexp, (match, ...args) => {
         const key = args[0];
         if (vite_cfg.env[key] == undefined) {
             console.warn(
