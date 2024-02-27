@@ -1,18 +1,18 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`replaceCompleteConfig 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
     <head>
-        <meta charset=\\"UTF-8\\" />
-        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
-        <meta name=\\"test\\" content=\\"{{ VITE_TEST_IN_HEAD }}\\" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="test" content="{{ VITE_TEST_IN_HEAD }}" />
         <title>Vite Test html</title>
     </head>
     <body>
         <h1>Hello {{ VITE_TEST_PERSON_NAME }}</h1>
-        <script type=\\"application/ecmascript\\">
-            window.config = Object.freeze({\\"VITE_TEST_IN_HEAD\\":\\"test-in-head-value\\",\\"VITE_TEST_PERSON_NAME\\":\\"max mustermann\\"});
+        <script type="application/ecmascript">
+            window.config = Object.freeze({"VITE_TEST_IN_HEAD":"test-in-head-value","VITE_TEST_PERSON_NAME":"max mustermann"});
         </script>
     </body>
 </html>
@@ -21,16 +21,16 @@ exports[`replaceCompleteConfig 1`] = `
 
 exports[`replaceIndividualKeys 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
     <head>
-        <meta charset=\\"UTF-8\\" />
-        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
-        <meta name=\\"test\\" content=\\"test-in-head-value\\" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="test" content="test-in-head-value" />
         <title>Vite Test html</title>
     </head>
     <body>
         <h1>Hello max mustermann</h1>
-        <script type=\\"application/ecmascript\\">
+        <script type="application/ecmascript">
             window.config = Object.freeze({% VITE_RT_CONFIG %});
         </script>
     </body>
